@@ -10,7 +10,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=8082
-      - DB_URI_PROD=mongodb+srv://devs-toni:aSJazxDPdxwBiLZg@cluster0.hwmnwed.mongodb.net/
+      - DB_URI_PROD=mongodb+srv://devs-toni:aSJazxDPdxwBiLZg@cluster0.hwmnwed.mongodb.net/smoothsick
 
   frontend:
     container_name: servsmoothfrnt
