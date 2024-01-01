@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+
+  backend:
+    container_name: servsmoothapi
+    image: devstoni/smoothsick-api:0.0.2
+    ports:
+      - '8082:8082'
+
+  frontend:
+    container_name: servsmoothfrnt
+    image: devstoni/smoothsick-front:0.0.3
+    ports:
+      - '3002:3002'
+    stdin_open: true
+
+networks:
+  default:
+    name: servsmoothops_net
+  
