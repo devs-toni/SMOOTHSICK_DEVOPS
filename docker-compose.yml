@@ -17,7 +17,7 @@ services:
       - '3002:3002'
     stdin_open: true
     environment:
-      - VITE_BACKEND=https://smoothsick-api.arcprojects.es
+      - VITE_BACKEND=https://smoothsick-api.arcprojects.es/
 
 networks:
   default:
