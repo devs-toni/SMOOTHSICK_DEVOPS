@@ -3,25 +3,35 @@ version: '3.8'
 services:
 
   backend:
-    container_name: servsmoothapi
-    image: devstoni/smoothsick-api:0.0.2
+    container_name: smoothsick-api
+    image: devstoni/smoothsick-api:0.0.3
     ports:
-      - '8082:8082'
+      - $HOST_SERVER_PORT:$SERVER_PORT
     environment:
       - NODE_ENV=production
-      - PORT=8082
-      - DB_URI_PROD=mongodb+srv://devs-toni:aSJazxDPdxwBiLZg@cluster0.hwmnwed.mongodb.net/smoothsick
+      - PORT=$SERVER_PORT
+      - DB_URI=$DB_URL
+      - CLOUDINARY_NAME=$CLOUDINARY_NAME
+      - CLOUDINARY_KEY=$CLOUDINARY_KEY
+      - CLOUDINARY_SECRET=$CLOUDINARY_SECRET
+      - FRONT_URI=$FRONT_URL
+    networks:
+      - net
 
   frontend:
-    container_name: servsmoothfrnt
+    container_name: smoothsick-client
     image: devstoni/smoothsick-front:0.0.3
     ports:
-      - '3002:3002'
+      - $HOST_CLIENT_PORT:3002
     stdin_open: true
     environment:
-      - VITE_BACKEND=https://smoothsick-api.arcprojects.es/
+      - VITE_BACKEND=$SERVER_URL
+      - VITE_GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
+    networks:
+      - net
 
 networks:
-  default:
-    name: servsmoothops_net
+  net:
+    external: false
+
   
