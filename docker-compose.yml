@@ -24,7 +24,7 @@ services:
       - database
     restart: unless-stopped
     ports:
-      - $HOST_SERVER_PORT:$SERVER_PORT
+      - $SERVER_HOST_PORT:$SERVER_PORT
     environment:
       - NODE_ENV=production
       - PORT=$SERVER_PORT
@@ -32,7 +32,7 @@ services:
       - CLOUDINARY_NAME=$CLOUDINARY_NAME
       - CLOUDINARY_KEY=$CLOUDINARY_KEY
       - CLOUDINARY_SECRET=$CLOUDINARY_SECRET
-      - FRONT_URI=$FRONT_URL
+      - FRONT_URI=$CLIENT_URL
     networks:
       - net
 
@@ -40,7 +40,7 @@ services:
     container_name: smoothsick-client
     image: devstoni/smoothsick-front:0.0.3
     ports:
-      - $HOST_CLIENT_PORT:3002
+      - $CLIENT_HOST_PORT:3002
     stdin_open: true
     environment:
       - VITE_BACKEND=$SERVER_URL
