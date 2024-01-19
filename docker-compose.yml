@@ -6,7 +6,7 @@ services:
     container_name: smoothsick-api
     image: devstoni/smoothsick-api:0.0.3
     ports:
-      - $HOST_SERVER_PORT:$SERVER_PORT
+      - $SERVER_HOST_PORT:$SERVER_PORT
     environment:
       - NODE_ENV=production
       - PORT=$SERVER_PORT
@@ -22,7 +22,7 @@ services:
     container_name: smoothsick-client
     image: devstoni/smoothsick-front:0.0.3
     ports:
-      - $HOST_CLIENT_PORT:3002
+      - $CLIENT_HOST_PORT:3002
     stdin_open: true
     environment:
       - VITE_BACKEND=$SERVER_URL
