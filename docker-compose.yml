@@ -2,9 +2,27 @@ version: '3.8'
 
 services:
 
+  database:
+    container_name: smoothsick-database
+    image: mongo:6-jammy
+    environment:
+      MONGO_INITDB_DATABASE: $DB_NAME
+      MONGO_INITDB_ROOT_USERNAME: $DB_USER
+      MONGO_INITDB_ROOT_PASSWORD: $DB_PASSWORD
+    ports:
+      - $DB_PORT:27017
+    volumes:
+      - data:/smoothsick-data
+    command: mongod --auth --port 27017
+    networks:
+      - net
+
   backend:
     container_name: smoothsick-api
     image: devstoni/smoothsick-api:0.0.3
+    depends_on:
+      - database
+    restart: unless-stopped
     ports:
       - $HOST_SERVER_PORT:$SERVER_PORT
     environment:
@@ -34,4 +52,9 @@ networks:
   net:
     external: false
 
-  
+volumes:
+  data:
+
+    
+
+
