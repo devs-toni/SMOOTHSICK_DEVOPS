@@ -19,7 +19,7 @@ services:
 
   backend:
     container_name: smoothsick-api
-    image: devstoni/smoothsick-api:0.0.3
+    image: devstoni/smoothsick-api:0.0.8
     depends_on:
       - database
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
 
   frontend:
     container_name: smoothsick-client
-    image: devstoni/smoothsick-front:0.0.3
+    image: devstoni/smoothsick-front:0.0.4
     ports:
       - $CLIENT_HOST_PORT:3002
     stdin_open: true
