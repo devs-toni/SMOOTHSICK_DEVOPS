@@ -11,13 +11,16 @@ services:
       MONGO_INITDB_ROOT_USERNAME: $DB_USER
       MONGO_INITDB_ROOT_PASSWORD: $DB_PASSWORD
     ports:
-      - $DB_PORT:27017
+      - '27017:27017'
+    expose:
+      - '27017'
     volumes:
-      - data:/smoothsick-data
+
+      - data:/data/db
     command: mongod --auth --port 27017
     networks:
       - net
-
+      
   backend:
     container_name: smoothsick-api
     image: devstoni/smoothsick-api:0.0.8
@@ -42,7 +45,6 @@ services:
   frontend:
     container_name: smoothsick-client
     image: devstoni/smoothsick-front:0.0.4
-    restart: unless-stopped
     ports:
       - $CLIENT_HOST_PORT:3002
     stdin_open: true
@@ -58,7 +60,3 @@ networks:
 
 volumes:
   data:
-
-    
-
-
