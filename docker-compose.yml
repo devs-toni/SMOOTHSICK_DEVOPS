@@ -5,6 +5,7 @@ services:
   database:
     container_name: smoothsick-database
     image: mongo:6-jammy
+    restart: unless-stopped
     environment:
       MONGO_INITDB_DATABASE: $DB_NAME
       MONGO_INITDB_ROOT_USERNAME: $DB_USER
@@ -41,6 +42,7 @@ services:
   frontend:
     container_name: smoothsick-client
     image: devstoni/smoothsick-front:0.0.4
+    restart: unless-stopped
     ports:
       - $CLIENT_HOST_PORT:3002
     stdin_open: true
