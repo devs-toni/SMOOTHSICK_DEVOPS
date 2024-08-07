@@ -45,6 +45,7 @@ services:
   frontend:
     container_name: smoothsick-client
     image: devstoni/smoothsick-front:0.0.4
+    restart: unless-stopped
     ports:
       - $CLIENT_HOST_PORT:3002
     stdin_open: true
