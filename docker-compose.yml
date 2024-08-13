@@ -21,7 +21,7 @@ services:
     networks:
       - net
       
-  backend:
+  smoothsick_backend:
     container_name: smoothsick-api
     image: devstoni/smoothsick-api:0.0.8
     depends_on:
@@ -41,8 +41,12 @@ services:
       - JWT_SECRET=$JWT_SECRET
     networks:
       - net
-
-  frontend:
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.smoothsick_backend.rule=Host(`smoothsick.api.local`)"
+      - "traefik.http.services.smoothsick_backend.loadbalancer.server.port=$SERVER_HOST_PORT" 
+      
+  smoothsick_frontend:
     container_name: smoothsick-client
     image: devstoni/smoothsick-front:0.0.4
     restart: unless-stopped
@@ -54,6 +58,10 @@ services:
       - VITE_GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
     networks:
       - net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.smoothsick_frontend.rule=Host(`smoothsick.local`)"
+      - "traefik.http.services.smoothsick_frontend.loadbalancer.server.port=$CLIENT_HOST_PORT" 
 
 networks:
   net:
